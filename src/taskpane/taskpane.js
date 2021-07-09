@@ -18,14 +18,14 @@ Office.onReady((info) => {
       }
 
     // Assign event handlers and other initialization logic.
-    document.getElementById("create-table").onclick = createTable;
+    document.getElementById("currency-values").onclick = getcurrencyvalues;
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
     
   }
 });
 
-function createTable() {
+function getcurrencyvalues() {
     Excel.run(function (context) {
 
       var currentWorksheet = context.workbook.worksheets.getActiveWorksheet();
@@ -42,8 +42,36 @@ function createTable() {
            ["1/10/2017", "Coho Vineyard", "Restaurant", "33"],
            ["1/11/2017", "Bellows College", "Education", "350.1"],
            ["1/15/2017", "Trey Research", "Other", "135"],
-           ["1/15/2017", "Best For You Organics Company", "Groceries", "97.88"]
-]);
+           ["1/15/2017", "Best For You Organics Company", "Groceries", "97.88"],
+           ]);
+
+          'use strict';
+           var request = require('request');
+
+           // replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+           var url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=JPY&apikey=4L1LKLF9MBLENZEP';
+
+           request.get({
+           url: url,
+           json: true,
+           headers: {'User-Agent': 'request'}
+          }, (err, res, data) => {
+            if (err) {
+            console.log('Error:', err);
+            } else if (res.statusCode !== 200) {
+             console.log('Status:', res.statusCode);
+            } else {
+           // data is successfully parsed as a JSON object:
+            console.log(data);
+            }
+          });
+  
+        
+        expensesTable.rows.add(null /*add at the end*/, [
+          data
+        ]);
+
+
 
       expensesTable.columns.getItemAt(3).getRange().numberFormat = [['\u20AC#,##0.00']];
       expensesTable.getRange().format.autofitColumns();
@@ -58,3 +86,4 @@ function createTable() {
         }
     });
 }
+

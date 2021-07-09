@@ -7,6 +7,7 @@
  body {
      width: 100%;
      height: 100%;
+     background-color: #ffffff;
      margin: 0;
      padding: 0;
  }
@@ -19,7 +20,8 @@
  .ms-welcome__header {
     padding: 20px;
     padding-bottom: 30px;
-    padding-top: 100px;
+    padding-top: 10px;
+    background-color: #ffffff;
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
@@ -30,6 +32,7 @@
  .ms-welcome__main {
     display: -webkit-flex;
     display: flex;
+    background-color: #ffffff;
     -webkit-flex-direction: column;
     flex-direction: column;
     -webkit-flex-wrap: nowrap;
@@ -77,4 +80,8 @@
 
 b {
     font-weight: bold;
+}
+
+h1 {
+    font-size: 10px;
 }
